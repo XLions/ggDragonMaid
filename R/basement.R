@@ -59,15 +59,15 @@ WideDatasetCharacterNameInMultipleLanguge<-function(){
 #'
 #' @examples
 #' # 查找所有龙族女性角色的中文名
-#' SearchCharactersNameInMultipleLanguge(
+#' SearchCharactersNameInDetails(
 #'   Gender = "Female", Species = "Dragon", Language = "Chinese"
 #' )
 #'
 #' # 查找所有人类男性角色的罗马音
-#' SearchCharactersNameInMultipleLanguge(
+#' SearchCharactersNameInDetails(
 #'   Gender = "Male", Species = "Human", Language = "Romaji"
 #' )
-SearchCharactersNameInMultipleLanguge <-
+SearchCharactersNameInDetails <-
   function(Gender = c('Male','Female'),
            Species = c('Dragon','Human'),
            Language = c("Chinese", "Japanese", "Romaji")) {
@@ -99,4 +99,70 @@ SearchCharactersNameInMultipleLanguge <-
       return(result)
     }
   }
+
+
+#' 按名称搜索角色多语言信息
+#'
+#' 输入一个角色名（中文、日文或罗马音），函数自动检测其语言，
+#' 并在《小林家的龙女仆》角色宽表中查找匹配的记录，返回完整的行信息。
+#'
+#' @param name 长度为1的字符向量，待搜索的角色名称。
+#'   支持中文名（如 \code{"托尔"}）、日文名（如 \code{"トール"}）或罗马音（如 \code{"Tohru"}）。
+#'
+#' @return 一个包含1行5列的 \code{data.frame}（若找到匹配），列名同
+#'   \code{WideDatasetCharacterNameInMultipleLanguge()} 的输出。
+#'   若无匹配或语言无法识别，则返回空数据框（0行5列）并给出警告。
+#' @export
+#'
+#' @examples
+#' # 用中文名搜索
+#' SearchCharactersNameInMultipleLanguge("康娜卡姆依")
+#'
+#' # 用日文名搜索
+#' SearchCharactersNameInMultipleLanguge("エルマ")
+#'
+#' # 用罗马音搜索（不区分大小写）
+#' SearchCharactersNameInMultipleLanguge("tohru")
+SearchCharactersNameInMultipleLanguge <- function(name) {
+  # 输入检查
+  if (!is.character(name) || length(name) != 1 || is.na(name) || nchar(name) == 0) {
+    warning("请输入一个非空且长度为1的字符型名字。")
+    return(WideDatasetCharacterNameInMultipleLanguge()[0, ])
+  }
+
+  # 获取完整数据
+  df <- WideDatasetCharacterNameInMultipleLanguge()
+
+  # 检测语言
+  lang <- detect_language(name)
+
+  # 根据语言选择对应的列名
+  col_map <- c(
+    Chinese  = "ChineseName",
+    Japanese = "JapaneseName",
+    Romaji   = "Romaji"
+  )
+
+  if (!lang %in% names(col_map)) {
+    warning(sprintf("无法识别的语言类型：%s。仅接受中文、日文或罗马音输入。", lang))
+    return(df[0, ])
+  }
+
+  target_col <- col_map[[lang]]
+
+  # 构建筛选逻辑（罗马音忽略大小写）
+  if (lang == "Romaji") {
+    matched <- tolower(df[[target_col]]) == tolower(name)
+  } else {
+    matched <- df[[target_col]] == name
+  }
+
+  # 返回结果
+  result <- df[matched, , drop = FALSE]
+  if (nrow(result) == 0) {
+    warning(sprintf("未找到名称为 \"%s\" 的角色。", name))
+  }
+
+  return(result)
+}
 

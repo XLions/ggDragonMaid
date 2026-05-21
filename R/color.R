@@ -133,38 +133,19 @@ Maid_colors_Romaji <- function(name, theme = "classic") {
 #' # 未找到角色时抛出错误
 #' Maid_color("小美", lang = "Chinese")
 #' }
-Maid_color <- function(name, lang, theme = "classic") {
-  # 标准化语言参数
-  lang <- match.arg(lang, choices = c("Chinese", "Japanese", "Romaji"))
+Maid_color <- function(name, theme = "classic") {
 
-  # 获取所有角色在指定语言下的名字列表
-  # 这里使用性别和种族的全集，确保返回全部12个角色
-  all_names <- SearchCharactersNameInMultipleLanguge(
-    Gender   = c("Male", "Female"),
-    Species  = c("Dragon", "Human"),
-    Language = lang
-  )
+  # 获取对应罗马音名称
+  name_clean<-SearchCharactersNameInMultipleLanguge(name)$Romaji
 
-  # 在所有名字中不区分大小写匹配输入
-  name_clean <- trimws(name)
-  idx <- which(tolower(all_names) == tolower(name_clean))
-
-  if (length(idx) == 0) {
-    stop("未找到对应角色: ", name, " (语言: ", lang, ")")
+  if (length(name_clean) == 0) {
+    stop("未找到对应角色: ", name)
   }
-  if (length(idx) > 1) {
+  if (length(name_clean) > 1) {
     # 理论上不应发生（角色名唯一），但保留安全检查
     stop("名称 '", name, "' 匹配到多个角色，请联系数据维护者。")
   }
 
-  # 获取所有角色的罗马音列表，并提取匹配位置的罗马音
-  all_romaji <- SearchCharactersNameInMultipleLanguge(
-    Gender   = c("Male", "Female"),
-    Species  = c("Dragon", "Human"),
-    Language = "Romaji"
-  )
-  romaji_name <- all_romaji[idx]
-
   # 利用罗马音获取配色向量
-  return(Maid_colors_Romaji(name = romaji_name, theme = theme))
+  return(Maid_colors_Romaji(name = name_clean, theme = theme))
 }
