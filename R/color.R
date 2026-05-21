@@ -149,3 +149,106 @@ Maid_color <- function(name, theme = "classic") {
   # 利用罗马音获取配色向量
   return(Maid_colors_Romaji(name = name_clean, theme = theme))
 }
+
+
+#' 绘制《小林家的龙女仆》角色主题色热图
+#'
+#' @description
+#' 根据输入指定的语言（中文、日文或罗马音），生成一个展示各个角色经典配色（Hex色值）的热图。
+#' 颜色将按照调色板顺序从左到右排列，左侧 Y 轴为对应语言的角色名称。
+#'
+#' @param lang 字符串，指定显示的语言。可选值为 \code{"Chinese"} (中文),
+#' \code{"Japanese"} (日文), 或 \code{"Romaji"} (罗马音)。默认为 \code{"Chinese"}。
+#'
+#' @return 返回一个 \code{ggplot} 对象，显示角色主题色的热图。
+#'
+#' @importFrom ggplot2 ggplot aes geom_tile scale_fill_identity scale_x_continuous theme_minimal labs theme element_blank element_text
+#' @export
+#'
+#' @examples
+#' # 绘制中文角色名热图
+#' Show_Maid_colors(lang = "Chinese")
+#'
+#' # 绘制日文角色名热图
+#' Show_Maid_colors(lang = "Japanese")
+Show_Maid_colors <-
+  function(lang = c("Chinese", "Japanese", "Romaji")) {
+  # 验证输入参数，默认取第一个有效值
+  lang <- match.arg(lang)
+
+  # 1. 载入内置的两个数据集
+  char_data <- WideDatasetCharacterNameInMultipleLanguge()
+  color_data <- ColorDataSets_Classic()
+
+  # 2. 为颜色数据添加序列号，用于热图的 X 轴 (1到5)
+  # 使用 ave 函数按 name 分组生成序号，不依赖 dplyr
+  color_data$color_index <- ave(integer(nrow(color_data)), color_data$name, FUN = seq_along)
+
+  # 3. 合并数据
+  # color_data 的 'name' 列对应 char_data 的 'Romaji' 列
+  merged_data <- merge(color_data, char_data, by.x = "name", by.y = "Romaji", all.x = TRUE)
+
+  # 4. 根据输入的语言选择要在 Y 轴上显示的列名，并提取对应的列数据
+  y_col <- switch(lang,
+                  "Chinese" = "ChineseName",
+                  "Japanese" = "JapaneseName",
+                  "Romaji" = "name")
+
+  # 为了让 Y 轴按照原始数据集的顺序排列（第一个角色在热图最上方），需要将其转换为因子并反转 levels
+  original_col_name <- switch(lang,
+                              "Chinese" = "ChineseName",
+                              "Japanese" = "JapaneseName",
+                              "Romaji" = "Romaji")
+  name_levels <- rev(char_data[[original_col_name]])
+  merged_data[[y_col]] <- factor(merged_data[[y_col]], levels = name_levels)
+
+  # 5. 确保 ggplot2 可用 (在包开发中通过 Imports 声明即可)
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("Please install 'ggplot2' to use this function.")
+  }
+
+  # 6. 设置对应语言的绘图
+  plot_labels <- switch(lang,
+                        "Chinese" = list(
+                          # 使用 expression(italic("text") * "text") 来拼接斜体和正体
+                          title = expression(italic("《小林家的龙女仆》") * " 角色经典配色"),
+                          subtitle = "当前显示语言: 中文",
+                          x = "颜色顺位",
+                          y = "角色名称"
+                        ),
+                        "Japanese" = list(
+                          title = expression(italic("小林さんちのメイドラゴン") * " キャラクター定番配色"),
+                          subtitle = "現在の表示言語: 日本語",
+                          x = "色の順位",
+                          y = "キャラクター名"
+                        ),
+                        "Romaji" = list(
+                          title = expression(italic("Miss Kobayashi's Dragon Maid") * " Character Classic Colors"),
+                          subtitle = "Current Language: Romaji",
+                          x = "Color Order",
+                          y = "Character Name"
+                        )
+  )
+
+  # 7. 绘制热图
+  # 使用 .data[[]] 语法来动态调用列名，这可以避免 R CMD check 出现 "no visible binding for global variable" 的警告
+  p <- ggplot2::ggplot(merged_data, ggplot2::aes(x = color_index, y = .data[[y_col]], fill = color)) +
+    ggplot2::geom_tile(color = "white", linewidth = 0.5) +  # 添加白色边框分割色块
+    ggplot2::scale_fill_identity() +                        # 核心：让 ggplot2 直接解析 Hex 颜色字符串而不是将其当作分类变量
+    ggplot2::scale_x_continuous(breaks = 1:5) +
+    ggplot2::theme_minimal() +
+    ggplot2::labs(
+      x = plot_labels$x,
+      y = plot_labels$y,
+      title = plot_labels$title,
+      subtitle = plot_labels$subtitle
+    ) +
+    ggplot2::theme(
+      panel.grid = ggplot2::element_blank(),              # 移除网格线使热图更干净
+      axis.text.y = ggplot2::element_text(size = 11, face = "bold"),
+      axis.title.x = ggplot2::element_text(margin = ggplot2::margin(t = 10))
+    )+
+    showtext::showtext_auto()
+
+  return(p)
+}
