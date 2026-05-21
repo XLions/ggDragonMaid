@@ -1,0 +1,6 @@
+# 导出所有用户可见的函数
+export(WideDatasetCharacterNameInMultipleLanguge)
+export(SearchCharactersNameInMultipleLanguge)
+export(ColorDataSets_Classic)
+export(Maid_colors_Romaji)
+export(Maid_color)
