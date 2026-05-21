@@ -13,27 +13,30 @@ remotes::install_github("XLions/ggDragonMaid")
 ```
 
 ## 🎨 快速开始 / Quick Start
-### 1. 获取角色配色 / Get Character Colors
+### 1. 展示所有角色配色 / Show all Character Colors
+使用 `Show_Maid_colors()` 展示所有角色配色的热图。
+```R
+ggDragonMaid::Show_Maid_colors()
+```
+### 2. 获取角色配色 / Get Character Colors
 使用 `Maid_color()` 可以通过任意语言的角色名获取其经典 5 色调色板。
 ```R
-library(ggDragonMaid)
-
 # 用中文名获取托尔的颜色
 # 【所有中文名均参考B站中配版翻译】
-Maid_color("托尔", lang = "Chinese")
+ggDragonMaid::Maid_color("托尔", lang = "Chinese")
 #> [1] "#414763" "#FFD761" "#4FA478" "#EE6166" "#FFFFFF"
 
 # 用罗马音获取康娜的颜色
-Maid_color("Kanna Kamui", lang = "Romaji")
+ggDragonMaid::Maid_color("Kanna Kamui", lang = "Romaji")
 #> [1] "#E5DEEC" "#F2A3BC" "#34385E" "#00A5DF" "#FFF2E8"
 ```
 
-### 2. 角色信息检索 / Search Characters
+### 3. 角色信息检索 / Search Characters
 通过性别和种族筛选角色，返回指定语言的名字列表：
 
 ```R
 # 查找所有女性龙族角色的日文名
-SearchCharactersNameInMultipleLanguge(
+ggDragonMaid::SearchCharactersNameInMultipleLanguge(
   Gender = "Female",
   Species = "Dragon",
   Language = "Japanese"
@@ -41,17 +44,17 @@ SearchCharactersNameInMultipleLanguge(
 #> [1] "トール"        "カンナ·カムイ" "エルマ"        "ルコア"        "イルル"
 ```
   
-### 3. 完整数据表 / Full Dataset
+### 4. 完整数据表 / Full Dataset
 直接获取 12 位角色的基本信息（中文名、日文名、罗马音、性别、种族）：
 
 ```R
-WideDatasetCharacterNameInMultipleLanguge()
+ggDragonMaid::WideDatasetCharacterNameInMultipleLanguge()
 ```
   
-### 4. 原始配色数据 / Raw Color Data
+### 5. 原始配色数据 / Raw Color Data
 返回所有角色的 5 色调色板数据框：
 ```R
-head(ColorDataSets_Classic())
+head(ggDragonMaid::ColorDataSets_Classic())
 ```
 
 ### 🧑‍🎨 配色来源 / Color Source
