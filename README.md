@@ -9,7 +9,7 @@ ggDragonMaid is an R package that delivers classic color palettes inspired by th
 You can install the development version from GitHub:  
 ```R
 # install.packages("remotes")
-remotes::install_github("你的GitHub用户名/ggDragonMaid")
+remotes::install_github("XLions/ggDragonMaid")
 ```
 
 ## 🎨 快速开始 / Quick Start
@@ -19,6 +19,7 @@ remotes::install_github("你的GitHub用户名/ggDragonMaid")
 library(ggDragonMaid)
 
 # 用中文名获取托尔的颜色
+# 【所有中文名均参考B站中配版翻译】
 Maid_color("托尔", lang = "Chinese")
 #> [1] "#414763" "#FFD761" "#4FA478" "#EE6166" "#FFFFFF"
 
