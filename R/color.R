@@ -43,6 +43,10 @@ ColorDataSets_Classic<-function(){
   )
 }
 
+
+
+
+
 #' 提取角色配色向量
 #'
 #' 根据角色名称（罗马音）从经典配色数据中提取对应的颜色向量。
@@ -105,6 +109,8 @@ Maid_colors_Romaji <- function(name, theme = "classic") {
 }
 
 
+
+
 #' 根据角色名与语言获取配色向量
 #'
 #' 输入任意语言（中文、日文或罗马音）的角色名，先将其转换为罗马音，
@@ -149,6 +155,8 @@ Maid_color <- function(name, theme = "classic") {
   # 利用罗马音获取配色向量
   return(Maid_colors_Romaji(name = name_clean, theme = theme))
 }
+
+
 
 
 #' 绘制《小林家的龙女仆》角色主题色热图
@@ -251,4 +259,46 @@ Show_Maid_colors <-
     showtext::showtext_auto()
 
   return(p)
+}
+
+
+
+
+#' 获取角色CP组合的代表颜色
+#'
+#' 根据输入的角色名，在预设的CP配对表中查找该角色所属的CP组，
+#' 并返回该CP组对应的两种代表颜色。颜色顺序为：人类角色的颜色在前，
+#' 龙族角色的颜色在后。
+#'
+#' @param name 长度为1的字符向量，角色名称。支持中文名（如 \code{"小林"}）、
+#'   日文名（如 \code{"小林"}）或罗马音（如 \code{"Kobayashi"}）。
+#'
+#' @return 长度为2的字符向量，包含两个十六进制颜色码。第一个颜色对应人类角色，
+#'   第二个颜色对应龙族角色。
+#' @export
+#'
+#' @examples
+#' # 获取小林和托尔这对CP的代表颜色
+#' getColor_CP("小林")
+#'
+#' # 使用罗马音获取
+#' getColor_CP("Kanna Kamui")
+getColor_CP<-function(name){
+  CP_color_df<-
+    data.frame(
+      Character=c(
+        '小林','才川理子','泷谷真','真土翔太','会田竹人',
+        '托尔','康娜卡姆依','法夫纳','尔科亚','依露露'
+      ),
+      CP=paste0('CP',rep(as.character(1:5),2)),
+      Color=c(
+        "#E07A7A","#76D296","#FFFFFF","#9F73CE","#373C41",
+        "#FFD761","#F2A3BC","#585864","#E5EA6D","#E7465F"
+      )
+    )
+  name_Chinese<-SearchCharactersNameInMultipleLanguge(name)$ChineseName
+  CPNo_Name<-CP_color_df$CP[which(CP_color_df$Character==name_Chinese)]
+  return(
+    CP_color_df$Color[which(CP_color_df$CP==CPNo_Name)] #输出的颜色人在前龙在后
+  )
 }

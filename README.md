@@ -1,6 +1,6 @@
 # ggDragonMaid
  
-ggDragonMaid 是一个 R 语言扩展包，提供动画《小林家的龙女仆》中 12 位主要角色的经典配色方案，以及多语言（中文、日文、罗马音）的角色基本信息表。你可以将这些配色用于 ggplot2 图表，或为任何可视化作品增添一抹龙娘色彩。  
+ggDragonMaid 是一个 R 语言扩展包，提供动画《小林家的龙女仆》中 12 位主要角色的经典配色方案，以及多语言（中文、日文、罗马音）的角色基本信息表。你可以将这些配色用于 ggplot2 图表，或为任何可视化作品增添一抹龙女仆色彩。  
   
 ggDragonMaid is an R package that delivers classic color palettes inspired by the 12 main characters from the anime Miss Kobayashi's Dragon Maid, along with a multilingual character dataset (Chinese, Japanese, Romaji). Use the palettes in ggplot2 or any R graphic to bring a touch of dragon-maid charm to your visualizations.  
 
@@ -33,7 +33,20 @@ ggDragonMaid::Maid_color("Kanna Kamui", lang = "Romaji")
 #> [1] "#E5DEEC" "#F2A3BC" "#34385E" "#00A5DF" "#FFF2E8"
 ```
 
-### 3. 角色信息检索 / Search Characters
+### 3. 获取CP组合代表色 / Get CP Pair Colors  
+根据任意语言的角色名，返回其所属CP组合的两种代表颜色（人类角色在前，龙族角色在后）。  
+Get the two representative colors of the CP pair for any given character (human character's color first, dragon's color second).  
+```R
+# 获取小林&托尔CP的代表色
+ggDragonMaid::getColor_CP("小林")
+#> [1] "#E07A7A" "#FFD761"
+
+# 使用日文名获取康娜CP的代表色
+ggDragonMaid::getColor_CP("カンナ·カムイ")
+#> [1] "#76D296" "#F2A3BC"
+```
+
+### 4. 角色信息检索 / Search Characters
 通过性别和种族筛选角色，返回指定语言的名字列表：  
 Filter characters by gender and race, returning a list of names in a specified language:
 ```R
@@ -46,18 +59,22 @@ ggDragonMaid::SearchCharactersNameInMultipleLanguge(
 #> [1] "トール"        "カンナ·カムイ" "エルマ"        "ルコア"        "イルル"
 ```
   
-### 4. 完整数据表 / Full Dataset
-直接获取 12 位角色的基本信息（中文名、日文名、罗马音、性别、种族）：  
-Get the basic information of 12 characters directly (Chinese name, Japanese name, Romaji, gender, race):
-```R
-ggDragonMaid::WideDatasetCharacterNameInMultipleLanguge()
-```
-  
 ### 5. 原始配色数据 / Raw Color Data
 返回所有角色的 5 色调色板数据框：  
 Return a data frame of the 5-color palettes for all characters:
 ```R
 head(ggDragonMaid::ColorDataSets_Classic())
+```
+
+### 6. 内置示例图表 / Built‑in Example Plots
+包内提供了两个示例函数，直观展示如何将角色配色应用到`ggplot2`图表中：  
+The package includes two example functions to demonstrate how to apply character colors in`ggplot2`plots:  
+```R
+# 柱状图示例：托尔主题颜色 Bar plot Example: Tohru theme
+ggDragonMaid::example_col()
+
+# 韦恩图示例：小林&托尔CP颜色 Venn Example: Kobayashi & Tohru CP colors
+ggDragonMaid::example_venn()
 ```
 
 ### 🧑‍🎨 配色参考 / Color Reference
@@ -66,7 +83,7 @@ All colors are referenced from pictures of the character designs on [Moegirl Wik
 
 ---
 Enjoy your dragon-maid palette! 🐉✨
-享受你的龙娘调色板吧！
+享受你的龙女仆调色板吧！
 
 
 

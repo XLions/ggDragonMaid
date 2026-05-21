@@ -43,6 +43,9 @@ WideDatasetCharacterNameInMultipleLanguge<-function(){
   )
 }
 
+
+
+
 #' 按性别与种族搜索角色多语言名称
 #'
 #' 从角色信息表中按性别和种族筛选角色，并以指定语言返回角色名列表。
@@ -99,6 +102,8 @@ SearchCharactersNameInDetails <-
       return(result)
     }
   }
+
+
 
 
 #' 按名称搜索角色多语言信息
@@ -165,4 +170,55 @@ SearchCharactersNameInMultipleLanguge <- function(name) {
 
   return(result)
 }
+
+
+
+
+#' 搜索角色CP的罗马音名称
+#'
+#' 根据输入的任意语言（中文、日文或罗马音）角色名，在预设的CP配对表中查找
+#' 其对应的配对角色，并返回该角色的罗马音。CP配对基于《小林家的龙女仆》中的
+#' 主要官配关系：托尔 ↔ 小林、康娜卡姆依 ↔ 才川理子、法夫纳 ↔ 泷谷真、
+#' 尔科亚 ↔ 真土翔太、依露露 ↔ 会田竹人。
+#'
+#' @param name 长度为1的字符向量，待搜索的角色名称。支持中文名（如 \code{"托尔"}）、
+#' 日文名（如 \code{"トール"}）或罗马音（如 \code{"Tohru"}）。要求输入的
+#' 角色必须存在于角色信息表中，否则将引发错误。
+#'
+#' @return 一个字符串，表示配对角色的罗马音。例如输入 \code{"托尔"} 返回 \code{"Kobayashi"}，
+#' 输入 \code{"小林"} 返回 \code{"Tohru"}。
+#' @export
+#'
+#' @examples
+#' # 通过中文名查找CP
+#' SearchCP("托尔")
+#'
+#' # 通过罗马音查找CP
+#' SearchCP("Kobayashi")
+#'
+#' # 日文名也可以
+#' SearchCP("カンナ·カムイ")
+SearchCP<-function(name){
+  CP_df<-
+    data.frame(
+      #CP中的龙
+      Dragon=c('托尔','康娜卡姆依','法夫纳','尔科亚','依露露'),
+      #CP中的人
+      Human=c('小林','才川理子','泷谷真','真土翔太','会田竹人')
+    )
+  inputCharacter<-
+    SearchCharactersNameInMultipleLanguge(name)
+  if(inputCharacter$Species=='Human'){
+    return(
+      SearchCharactersNameInMultipleLanguge(
+      CP_df$Dragon[which(CP_df$Human==inputCharacter$ChineseName)])$Romaji
+    )
+  }else if(inputCharacter$Species=='Dragon'){
+    return(
+      SearchCharactersNameInMultipleLanguge(
+      CP_df$Human[which(CP_df$Dragon==inputCharacter$ChineseName)])$Romaji
+    )
+  }
+}
+
 
