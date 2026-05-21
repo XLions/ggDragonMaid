@@ -14,9 +14,9 @@ remotes::install_github("XLions/ggDragonMaid")
 
 ## 🎨 快速开始 / Quick Start
 ### 1. 展示所有角色配色 / Show all Character Colors
-使用 `Show_Maid_colors()` 展示所有角色配色的热图。
+使用 `Show_Maid_colors()` 展示所有角色配色的热图，并调整不同语言的坐标轴和标题标签。
 ```R
-ggDragonMaid::Show_Maid_colors()
+ggDragonMaid::Show_Maid_colors(lang = 'Romaji')
 ```
 ### 2. 获取角色配色 / Get Character Colors
 使用 `Maid_color()` 可以通过任意语言的角色名获取其经典 5 色调色板。
