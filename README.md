@@ -60,9 +60,9 @@ Return a data frame of the 5-color palettes for all characters:
 head(ggDragonMaid::ColorDataSets_Classic())
 ```
 
-### 🧑‍🎨 配色来源 / Color Source
-所有颜色均参考自萌娘百科《小林家的龙女仆》角色形象设定。  
-All colors are referenced from the character designs on [Moegirl Wiki](https://mzh.moegirl.org.cn/%E5%B0%8F%E6%9E%97%E5%AE%B6%E7%9A%84%E9%BE%99%E5%A5%B3%E4%BB%86).
+### 🧑‍🎨 配色参考 / Color Reference
+所有颜色均参考自萌娘百科《小林家的龙女仆》角色形象设定的图片。  
+All colors are referenced from pictures of the character designs on [Moegirl Wiki](https://mzh.moegirl.org.cn/%E5%B0%8F%E6%9E%97%E5%AE%B6%E7%9A%84%E9%BE%99%E5%A5%B3%E4%BB%86).
 
 ---
 Enjoy your dragon-maid palette! 🐉✨
