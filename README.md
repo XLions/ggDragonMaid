@@ -53,8 +53,18 @@ The rabbit icon appears multiple times throughout the anime. The rabbit icons on
 icon_rabbit_Tohru() # 绘制托尔的兔子图标：红底金色
 icon_rabbit_Kobayashi() # 绘制小林的兔子图标：金底红色
 
-# 自定义的兔子图标
+# 自定义的兔子图标（完整ggplot对象）
 icon_rabbit_detail(
+    fill,
+    linecolor=NA,
+    background,
+    icon_size=1,
+    x0=0,
+    y0=0,
+    angle
+)
+# 自定义的兔子图标（仅图层）
+icon_rabbit_layer(
     fill,
     linecolor=NA,
     background,
