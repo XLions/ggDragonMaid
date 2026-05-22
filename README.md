@@ -46,7 +46,27 @@ ggDragonMaid::getColor_CP("カンナ·カムイ")
 #> [1] "#76D296" "#F2A3BC"
 ```
 
-### 4. 角色信息检索 / Search Characters
+### 4. 兔子图标 / Rabiit Icon
+兔子图标多次出现在动画中。小林和托尔的杯子上的兔子图标是出现频率最高的。  
+The rabbit icon appears multiple times throughout the anime. The rabbit icons on Kobayashi's and Tohru's cups are the most frequently seen ones.  
+```R
+icon_rabbit_Tohru() # 绘制托尔的兔子图标：红底金色
+icon_rabbit_Kobayashi() # 绘制小林的兔子图标：金底红色
+
+# 自定义的兔子图标
+icon_rabbit_detail(
+    fill,
+    linecolor=NA,
+    background,
+    icon_size=1,
+    x0=0,
+    y0=0,
+    angle
+)
+```
+
+## 💻 信息检索 / Information Search
+### 1. 角色信息检索 / Search Characters
 通过性别和种族筛选角色，返回指定语言的名字列表：  
 Filter characters by gender and race, returning a list of names in a specified language:
 ```R
@@ -59,14 +79,14 @@ ggDragonMaid::SearchCharactersNameInMultipleLanguge(
 #> [1] "トール"        "カンナ·カムイ" "エルマ"        "ルコア"        "イルル"
 ```
   
-### 5. 原始配色数据 / Raw Color Data
+### 2. 原始配色数据 / Raw Color Data
 返回所有角色的 5 色调色板数据框：  
 Return a data frame of the 5-color palettes for all characters:
 ```R
 head(ggDragonMaid::ColorDataSets_Classic())
 ```
 
-### 6. 内置示例图表 / Built‑in Example Plots
+### 3. 内置示例图表 / Built‑in Example Plots
 包内提供了两个示例函数，直观展示如何将角色配色应用到`ggplot2`图表中：  
 The package includes two example functions to demonstrate how to apply character colors in`ggplot2`plots:  
 ```R
