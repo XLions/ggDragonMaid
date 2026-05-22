@@ -107,7 +107,11 @@ ggDragonMaid::example_col()
 ggDragonMaid::example_venn()
 ```
 
-### 🧑‍🎨 配色参考 / Color Reference
+## 🔗 引用 / Citation
+**Liu, Z.** (2026). ggDragonMaid: An R Package for Anime-Inspired Color Palettes and Multilingual Character Data from Miss Kobayashi’s Dragon Maid. *ACGN Nexus*, 1(1), e0007. https://doi.org/10.66309/7q3ekt83
+
+
+## 🧑‍🎨 配色参考 / Color Reference
 所有颜色均参考自萌娘百科《小林家的龙女仆》角色形象设定的图片。  
 All colors are referenced from pictures of the character designs on [Moegirl Wiki](https://mzh.moegirl.org.cn/%E5%B0%8F%E6%9E%97%E5%AE%B6%E7%9A%84%E9%BE%99%E5%A5%B3%E4%BB%86).
 
