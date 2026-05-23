@@ -43,9 +43,9 @@ icon_rabbit_detail<-function(
   p_face<-
     ggforce::geom_ellipse(ggplot2::aes(x0 = x0+rotate_point(A=c(0*icon_size,0.5*icon_size),C=angle)[1],
                                        y0 = y0+rotate_point(A=c(0*icon_size,0.5*icon_size),C=angle)[2], # 椭圆中心
-                              a = 1*icon_size, # 长轴
-                              b = 0.65*icon_size, # 短轴
-                              angle = (angle/180)*pi),
+                                       a = 1*icon_size, # 长轴
+                                       b = 0.65*icon_size, # 短轴
+                                       angle = (angle/180)*pi),
                           fill = fill,
                           color = linecolor, linewidth = 1.2)
 
@@ -79,8 +79,8 @@ icon_rabbit_detail<-function(
         y0+rotate_point(A=c((-1)*icon_size,(0)*icon_size),C=angle)[2],
         y0+rotate_point(A=c((-1)*icon_size,(-1)*icon_size),C=angle)[2]
       )
-      ),
-      fill = fill, color = linecolor, linewidth = 1.2)
+    ),
+    fill = fill, color = linecolor, linewidth = 1.2)
   #底部右三角
   p_bottomRightTriangle<-
     ggplot2::geom_polygon(ggplot2::aes(
@@ -98,7 +98,7 @@ icon_rabbit_detail<-function(
 
   #拼图
   Combined<-
-  ggplot2::ggplot()+
+    ggplot2::ggplot()+
     p_face+
     p_leftEar+p_rightEar+
     p_bottomLeftTriangle+p_bottomRightTriangle+
@@ -216,9 +216,9 @@ icon_rabbit_layer<-function(
   #拼图
   Combined<-
     list(
-    p_face,
-    p_leftEar,p_rightEar,
-    p_bottomLeftTriangle,p_bottomRightTriangle)
+      p_face,
+      p_leftEar,p_rightEar,
+      p_bottomLeftTriangle,p_bottomRightTriangle)
 
   #输出
   return(Combined)
@@ -274,4 +274,155 @@ icon_rabbit_Kobayashi<-function(){
       angle=0
     )
   )
+}
+
+
+
+#' 绘制小林送给托尔的围巾（龙图案）
+#'
+#' @description 绘制《小林家的龙女仆》中小林送给托尔的围巾上的龙图案，红色背景上有一条绿色龙纹。
+#'
+#' @return 返回一个包含该围巾龙图案的 ggplot 对象。
+#' @export
+#'
+#' @examples
+#' icon_dragon_scarf()
+icon_dragon_scarf<-function(){
+
+  # 巨大红色背景：围巾材质
+  p_bg<-list(
+    ggplot2::geom_rect(ggplot2::aes(xmin = -50, xmax = 17, ymax = 80, ymin = -30),
+                       fill = 'indianred'))
+  # 龙上方绿色横块
+  p_greenAbove<-list(
+    ggplot2::geom_rect(ggplot2::aes(xmin = -50, xmax = 17, ymax = 40+4*((3)^0.5), ymin = 40-4*((3)^0.5)),
+                       fill = '#00CD00'),
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-50,xend=17,y=40-4*((3)^0.5),yend=40-4*((3)^0.5)),
+                          color='darkgreen',linewidth=1),
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-50,xend=17,y=40,yend=40),
+                          color='darkgreen',linewidth=1),
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-50,xend=17,y=40+4*((3)^0.5),yend=40+4*((3)^0.5)),
+                          color='darkgreen',linewidth=1)
+  )
+
+  # 身子
+  p_body<-list(
+    ggplot2::geom_rect(ggplot2::aes(xmin = -50, xmax = -10, ymax = 2*((3)^0.5), ymin = -6*((3)^0.5)),
+                       fill = '#00CD00'),
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-50,xend=-10,y=-4*((3)^0.5),yend=-4*((3)^0.5)),
+                          color='darkgreen',linewidth=1))
+
+  # 龙头基底背景【第二最难的部分】
+  p_head_bg<-list(
+    #大背景
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = -10, xmax = 7+((3)^0.5)/2, ymax = 2*((3)^0.5), ymin = -6*((3)^0.5)),
+                       fill = 'indianred'),
+    #X轴上半部分背景和矩形
+    ggplot2::geom_polygon(mapping=ggplot2::aes(x=c(0,0,-3,-3),y=c(0,2*((3)^0.5),2*((3)^0.5),0)),
+                          fill = 'indianred'),
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = -10, xmax = -3, ymax = 2*((3)^0.5), ymin = 0),
+                       fill = '#00CD00'),
+    #X轴上半部分圆角
+    ggplot2::geom_polygon(mapping=ggplot2::aes(x=c(0,-1.5,-3,-3),y=c(0,3*((3)^0.5)/2,((3)^0.5),0)),
+                          fill = '#00CD00'),
+    ggforce::geom_circle(mapping=ggplot2::aes(x0 = -3, y0 = ((3)^0.5), r = ((3)^0.5)),
+                         fill = "#00CD00",color=NA),
+    #X轴下半部分圆角
+    ggplot2::geom_polygon(mapping=ggplot2::aes(x=c(0,1.5,3,3,0),y=c(0,-3*((3)^0.5)/2,-((3)^0.5),-2*((3)^0.5),-2*((3)^0.5))),
+                          fill = '#00CD00'),
+    ggforce::geom_circle(mapping=ggplot2::aes(x0 = 3, y0 = -((3)^0.5), r = ((3)^0.5)),
+                         fill = "indianred",color=NA),
+    #突出的嘴巴部分
+    ggplot2::geom_polygon(mapping=ggplot2::aes(x=c(0,0,-5,-5),y=c(0,-2*((3)^0.5),-2*((3)^0.5),0)),
+                          fill = '#00CD00'),
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = -10, xmax = 7, ymax = -2*((3)^0.5), ymin = -6*((3)^0.5)),
+                       fill = '#00CD00'),
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = 7, xmax = 7+((3)^0.5)/2, ymax = -2*((3)^0.5), ymin = -6*((3)^0.5)),
+                       fill = 'indianred'),
+    ggforce::geom_circle(mapping=ggplot2::aes(x0 = 7, y0 = -5*((3)^0.5)/2, r = ((3)^0.5)/2),
+                         fill = "#00CD00",color=NA),
+    ggforce::geom_circle(mapping=ggplot2::aes(x0 = 7, y0 = -11*((3)^0.5)/2, r = ((3)^0.5)/2),
+                         fill = "#00CD00",color=NA),
+    #嘴巴左侧补充的绿色部分
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = 7, xmax = 7+((3)^0.5)/2, ymax = -5*((3)^0.5)/2, ymin = -11*((3)^0.5)/2),
+                       fill = '#00CD00'),
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = -10, xmax = -5, ymax = 2*((3)^0.5), ymin = -6*((3)^0.5)),
+                       fill = '#00CD00'),
+    ggplot2::coord_fixed())
+
+  # 嘴巴纹路
+  p_mouth_line<-list(
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-10,xend=0,y=-4*((3)^0.5),yend=-4*((3)^0.5)),
+                          color='darkgreen',linewidth=1),
+    ggplot2::geom_line(mapping=ggplot2::aes(x=seq((0),(7+((3)^0.5)/2),0.01),
+                                            y=(sin(2*seq((0),(7+((3)^0.5)/2),0.01))-4*((3)^0.5))),
+                       color='darkgreen',linewidth=1))
+
+  # 眼睛（椭圆）
+  p_eye<-list(
+    ggforce::geom_ellipse(ggplot2::aes(x0 = -5,
+                                       y0 = 0, # 椭圆中心
+                                       a = 1.5, # 长轴
+                                       b = 0.75, # 短轴
+                                       angle = 0),
+                          fill = 'lightgreen',color = 'darkgreen', linewidth=1))
+
+  # 角【第三最难的部分】
+  p_arc<-list(
+    ggforce::geom_circle(mapping=ggplot2::aes(x0 = 0, y0 = 12, r = 14),
+                         fill = "#00CD00",color='darkgreen',linewidth=1),
+    ggforce::geom_circle(mapping=ggplot2::aes(x0 = 0, y0 = 12, r = 12),
+                         fill = "indianred",color='darkgreen',linewidth=1),
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = -25, xmax = 17, ymax = 30, ymin = 12),
+                       fill = 'indianred'),
+    ggplot2::geom_rect(mapping=ggplot2::aes(xmin = -8, xmax = 17, ymax = 12, ymin = 0),
+                       fill = 'indianred')
+  )
+
+  # 龙的边缘描线【⚠️⚠️⚠️第一最难的部分！！！⚠️⚠️⚠️】
+  p_dragon_line<-list(
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-50,xend=-(sqrt(40+48*sqrt(3))),y=2*sqrt(3),yend=2*sqrt(3)),
+                          color='darkgreen',linewidth=1), #角左边的直线
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-12,xend=-14,y=12,yend=12),
+                          color='darkgreen',linewidth=1), #角的最上边的直线
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-sqrt(48*sqrt(3)-12),xend=-3,y=2*sqrt(3),yend=2*sqrt(3)),
+                          color='darkgreen',linewidth=1), #角右边的直线
+    ggforce::geom_arc(ggplot2::aes(x0 = -3, y0 = sqrt(3), r = sqrt(3), start = 0, end = pi/3),
+                      color = 'darkgreen', size = 1), #额头弧线
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-1.5,xend=0,y=1.5*sqrt(3),yend=0),
+                          color='darkgreen',linewidth=1), #x轴上方鼻梁直线斜坡
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=0,xend=1.5,y=0,yend=-1.5*sqrt(3)),
+                          color='darkgreen',linewidth=1), #x轴下方鼻梁直线斜坡
+    ggforce::geom_arc(ggplot2::aes(x0 = 3, y0 = -sqrt(3), r = sqrt(3), start = pi, end = 4*pi/3),
+                      color = 'darkgreen', size = 1), #鼻梁下方弧线
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=3,xend=7,y=-2*sqrt(3),yend=-2*sqrt(3)),
+                          color='darkgreen',linewidth=1), #嘴巴上方直线
+    ggforce::geom_arc(ggplot2::aes(x0 = (7), y0 = -5*sqrt(3)/2, r = sqrt(3)/2, start = 0, end = pi/2),
+                      color = 'darkgreen', size = 1), #嘴巴突出部分上半弧线
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=(7+sqrt(3)/2),xend=(7+sqrt(3)/2),
+                                               y=-5*sqrt(3)/2,yend=-11*sqrt(3)/2),
+                          color='darkgreen',linewidth=1), #嘴巴右侧直线
+    ggforce::geom_arc(ggplot2::aes(x0 = (7), y0 = -11*sqrt(3)/2, r = sqrt(3)/2, start = pi/2, end = pi),
+                      color = 'darkgreen', size = 1), #嘴巴突出部分下半弧线
+    ggplot2::geom_segment(mapping=ggplot2::aes(x=-50,xend=7,y=-6*sqrt(3),yend=-6*sqrt(3)),
+                          color='darkgreen',linewidth=1) #龙最下方直线
+  )
+
+  # # 辅助线坐标系
+  # xy<-list(
+  #   geom_hline(yintercept = 0,color='black'),
+  #   geom_vline(xintercept = 0,color='black')
+  # )
+  p_whole_dragon<-ggplot2::ggplot()+
+    p_bg+
+    p_greenAbove+
+    p_arc+
+    p_body+
+    p_head_bg+
+    p_mouth_line+
+    p_eye+
+    p_dragon_line+
+    p_dragon_line+
+    ggplot2::theme_void()
+  return(p_whole_dragon)
 }
