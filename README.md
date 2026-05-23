@@ -4,6 +4,8 @@ ggDragonMaid 是一个 R 语言扩展包，提供动画《小林家的龙女仆�
   
 ggDragonMaid is an R package that delivers classic color palettes inspired by the 12 main characters from the anime Miss Kobayashi's Dragon Maid, along with a multilingual character dataset (Chinese, Japanese, Romaji). Use the palettes in ggplot2 or any R graphic to bring a touch of dragon-maid charm to your visualizations.  
 
+![DragonMaidCamera](https://github.com/XLions/MyOwnTools/blob/59dc09b83f6d125dcbc2b4f17e1c5061ad9f1cd4/Pics/DragonMaidCamera.PNG)
+
 ## 📦 安装 / Installation
 目前可以从 GitHub 安装开发版：  
 You can install the development version from GitHub:  
