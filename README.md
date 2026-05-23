@@ -4,7 +4,11 @@ ggDragonMaid 是一个 R 语言扩展包，提供动画《小林家的龙女仆�
   
 ggDragonMaid is an R package that delivers classic color palettes inspired by the 12 main characters from the anime Miss Kobayashi's Dragon Maid, along with a multilingual character dataset (Chinese, Japanese, Romaji). Use the palettes in ggplot2 or any R graphic to bring a touch of dragon-maid charm to your visualizations.  
 
-![DragonMaidCamera](https://github.com/XLions/MyOwnTools/blob/59dc09b83f6d125dcbc2b4f17e1c5061ad9f1cd4/Pics/DragonMaidCamera.PNG)
+![DragonMaidCamera](https://github.com/XLions/MyStorage/blob/dbc2edbd0d80fc6161687ec43206bea1305ebace/ggDragonMaid_Pics/DragonMaidCamera.PNG)
+
+## ⚠️ 更新 / Update
+**V0.2.0:**
+- 增加`icon_dargon_scarf()`函数绘制小林送给托尔的围巾。 Add the `icon_dargon_scarf()` function to draw the scarf that Kobayashi gave to Tohru.
 
 ## 📦 安装 / Installation
 目前可以从 GitHub 安装开发版：  
@@ -52,30 +56,26 @@ ggDragonMaid::getColor_CP("カンナ·カムイ")
 兔子图标多次出现在动画中。小林和托尔的杯子上的兔子图标是出现频率最高的。  
 The rabbit icon appears multiple times throughout the anime. The rabbit icons on Kobayashi's and Tohru's cups are the most frequently seen ones.  
 ```R
-icon_rabbit_Tohru() # 绘制托尔的兔子图标：红底金色
-icon_rabbit_Kobayashi() # 绘制小林的兔子图标：金底红色
+ggDragonMaid::icon_rabbit_Tohru() # 绘制托尔的兔子图标：红底金色
+ggDragonMaid::icon_rabbit_Kobayashi() # 绘制小林的兔子图标：金底红色
 
 # 自定义的兔子图标（完整ggplot对象）
-icon_rabbit_detail(
-    fill,
-    linecolor=NA,
-    background,
-    icon_size=1,
-    x0=0,
-    y0=0,
-    angle
-)
+# fill和backgroud均为十六进制颜色；icon_size为与默认图标的比例；angle为旋转角度；x0和y0是图片中心坐标
+ggDragonMaid::icon_rabbit_detail(fill,linecolor=NA,background,icon_size=1,x0=0,y0=0,angle)
 # 自定义的兔子图标（仅图层）
-icon_rabbit_layer(
-    fill,
-    linecolor=NA,
-    background,
-    icon_size=1,
-    x0=0,
-    y0=0,
-    angle
-)
+ggDragonMaid::icon_rabbit_layer(fill,linecolor=NA,background,icon_size=1,x0=0,y0=0,angle)
 ```
+![icon_rabbit](https://github.com/XLions/MyStorage/blob/dbc2edbd0d80fc6161687ec43206bea1305ebace/ggDragonMaid_Pics/icon_rabbit.png)
+**Fig 1.** 兔子图标示例：**(A).** 图片参考第一季第二集10:42处； **(B).** 托尔主题； **(C).** 小林主题； **(D).** 不同大小和可旋转的兔子图标示例。
+  
+### 5. 小林送给托尔的龙围巾 / Kobayashi's dragon scarf for Tohru
+在圣诞节时，小林送给托尔一条红色底色、绿色龙图案的围巾。由于将图案几何化十分复杂，这个R包仅不提供放大缩小和旋转的功能。输出对象为固定ggplot对象。
+
+```R
+ggDragonMaid::icon_dragon_scarf()
+```
+![icon_dragon_scarf](https://github.com/XLions/MyStorage/blob/0d6bf3b5259ef4e291c566a19f26d6f3d94e9180/ggDragonMaid_Pics/icon_dragon_scarf.png)
+**Fig 2.** 龙围巾示例：**(A).** 图片参考第一季第十集21:15处； **(B).** 输出图案。
 
 ## 💻 信息检索 / Information Search
 ### 1. 角色信息检索 / Search Characters
