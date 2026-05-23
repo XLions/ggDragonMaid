@@ -8,7 +8,7 @@ ggDragonMaid is an R package that delivers classic color palettes inspired by th
 
 ## ⚠️ 更新 / Update
 **V0.2.0:**
-- 增加`icon_dargon_scarf()`函数绘制小林送给托尔的围巾。 Add the `icon_dargon_scarf()` function to draw the scarf that Xiao Lin gave to Thor.
+- 增加`icon_dargon_scarf()`函数绘制小林送给托尔的围巾。 Add the `icon_dargon_scarf()` function to draw the scarf that Kobayashi gave to Tohru.
 
 ## 📦 安装 / Installation
 目前可以从 GitHub 安装开发版：  
