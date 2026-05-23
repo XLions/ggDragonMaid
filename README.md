@@ -6,6 +6,10 @@ ggDragonMaid is an R package that delivers classic color palettes inspired by th
 
 ![DragonMaidCamera](https://github.com/XLions/MyOwnTools/blob/59dc09b83f6d125dcbc2b4f17e1c5061ad9f1cd4/Pics/DragonMaidCamera.PNG)
 
+## ⚠️ 更新 / Update
+**V0.2.0:**
+- 增加`icon_dargon_scarf()`函数绘制小林送给托尔的围巾。 Add the `icon_dargon_scarf()` function to draw the scarf that Xiao Lin gave to Thor.
+
 ## 📦 安装 / Installation
 目前可以从 GitHub 安装开发版：  
 You can install the development version from GitHub:  
