@@ -7,7 +7,7 @@
 #'
 #' @param name 角色名称，长度为1的字符向量。支持中文名（如 `"托尔"`）、
 #'   日文名（如 `"トール"`）或罗马音（如 `"Tohru"`）。函数内部会自动检测语言并匹配角色。
-#' @param bakcgroud 背景颜色，默认为 `NA`（透明背景）。可以传入颜色名或十六进制颜色码。
+#' @param backgroud 背景颜色，默认为 `NA`（透明背景）。可以传入颜色名或十六进制颜色码。
 #' @param border 像素方块的边框颜色，默认为 `NA`（无边框）。可以传入颜色名或十六进制颜色码。
 #'
 #' @return 返回一个 `list`，包含以下元素：
@@ -22,13 +22,13 @@
 #' @examples
 #' # 在空白画布上叠加托尔的像素图层
 #' ggplot2::ggplot() +
-#'   Q_pixel_layer("托尔", bakcgroud = "indianred", border = NA)
+#'   Q_pixel_layer("托尔", backgroud = "indianred", border = NA)
 #'
 #' # 叠加多个角色图层（需注意坐标可能重叠）
 #' ggplot2::ggplot() +
-#'   Q_pixel_layer("小林", bakcgroud = "gold") +
-#'   Q_pixel_layer("托尔", bakcgroud = "indianred")
-Q_pixel_layer <- function(name, bakcgroud = NA, border = NA) {
+#'   Q_pixel_layer("小林", backgroud = "gold") +
+#'   Q_pixel_layer("托尔", backgroud = "indianred")
+Q_pixel_layer <- function(name, backgroud = NA, border = NA) {
   # 1. 将输入名称转换为罗马音（去除空格以保证数据集命名一致）
   name_Romaji <- SearchCharactersNameInMultipleLanguge(name)$Romaji
   name_Romaji <- stringr::str_remove_all(name_Romaji,' ')
@@ -54,7 +54,7 @@ Q_pixel_layer <- function(name, bakcgroud = NA, border = NA) {
     # 清空主题元素，仅保留背景颜色设置
     ggplot2::theme_void(),
     ggplot2::theme(
-      panel.background = ggplot2::element_rect(fill = bakcgroud, color = NA),
+      panel.background = ggplot2::element_rect(fill = backgroud, color = NA),
       legend.position = "none"
     )
   )
@@ -81,10 +81,10 @@ Q_pixel_layer <- function(name, bakcgroud = NA, border = NA) {
 #'
 #' # 使用罗马音绘制康娜的头像
 #' Q_pixel_plot("Kanna Kamui")
-Q_pixel_plot <- function(name, bakcgroud = NA, border = NA) {
+Q_pixel_plot <- function(name, backgroud = NA, border = NA) {
   # 调用 Q_pixel_layer 生成图层列表，并用 ggplot() 初始化空画布
   return(
     ggplot2::ggplot() +
-      Q_pixel_layer(name = name, bakcgroud = bakcgroud, border = border)
+      Q_pixel_layer(name = name, backgroud = backgroud, border = border)
   )
 }
