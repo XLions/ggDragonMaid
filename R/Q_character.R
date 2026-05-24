@@ -30,8 +30,8 @@
 #'   Q_pixel_layer("托尔", bakcgroud = "indianred")
 Q_pixel_layer <- function(name, bakcgroud = NA, border = NA) {
   # 1. 将输入名称转换为罗马音（去除空格以保证数据集命名一致）
-  name_Romaji <- SearchCharactersNameInMultipleLanguge(name)$Romaji %>%
-    stringr::str_remove_all(' ')
+  name_Romaji <- SearchCharactersNameInMultipleLanguge(name)$Romaji
+  name_Romaji <- stringr::str_remove_all(name_Romaji,' ')
 
   # 2. 根据罗马音获取预定义的像素数据集（例如 Q_PixelData_Tohru）
   data <- get(paste0('Q_PixelData_', name_Romaji))

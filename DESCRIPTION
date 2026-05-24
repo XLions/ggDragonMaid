@@ -1,7 +1,7 @@
 Package: ggDragonMaid
 Type: Package
 Title: Character Colors and Data from "Miss Kobayashi's Dragon Maid"
-Version: 0.1.0
+Version: 0.3.0
 Authors@R: c(
     person(
       "Zhaoshuo", "Liu",
@@ -29,3 +29,4 @@ Imports:
     stringr
 Depends: 
     R (>= 3.5)
+    
