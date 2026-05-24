@@ -81,10 +81,10 @@ Q_pixel_layer <- function(name, bakcgroud = NA, border = NA) {
 #'
 #' # 使用罗马音绘制康娜的头像
 #' Q_pixel_plot("Kanna Kamui")
-Q_pixel_plot <- function(name) {
+Q_pixel_plot <- function(name, bakcgroud = NA, border = NA) {
   # 调用 Q_pixel_layer 生成图层列表，并用 ggplot() 初始化空画布
   return(
     ggplot2::ggplot() +
-      Q_pixel_layer(name = name, bakcgroud = NA, border = NA)
+      Q_pixel_layer(name = name, bakcgroud = bakcgroud, border = border)
   )
 }
