@@ -6,10 +6,10 @@ ggDragonMaid is an R package that delivers classic color palettes inspired by th
 
 ![DragonMaidCamera](https://github.com/XLions/MyStorage/blob/dbc2edbd0d80fc6161687ec43206bea1305ebace/ggDragonMaid_Pics/DragonMaidCamera.PNG)
 
-## ⚠️ 更新 / Update
+## ⚠️ 最新更新 / Last Update
 
-**V0.2.0:**
-- 增加`icon_dargon_scarf()`函数绘制小林送给托尔的围巾。 Add the `icon_dargon_scarf()` function to draw the scarf that Kobayashi gave to Tohru.
+**V0.3.0:**
+- 增加`Q_pixel_layer()`和`Q_pixel_plot()`函数绘制小林和托尔的Q版像素风人物。 Add Q_pixel_layer() and Q_pixel_plot() functions to draw chibi pixel art of Kobayashi and Tohru.
 
 ## 📦 安装 / Installation
 目前可以从 GitHub 安装开发版：  
@@ -76,7 +76,7 @@ ggDragonMaid::icon_rabbit_layer(fill,linecolor=NA,background,icon_size=1,x0=0,y0
 ggDragonMaid::Q_pixel_layer(name, backgroud = NA, border = NA)
 
 # 完整ggplot对象：用于展示 Full ggplot object: for display
-ggDragonMaid::Q_pixel_layer(name, backgroud = NA, border = NA)
+ggDragonMaid::Q_pixel_plot(name, backgroud = NA, border = NA)
 ```
 ![Chibi_pixel_1](https://github.com/XLions/MyStorage/blob/b87aee10e0eaba274a3bea76e4eec54a206a03da/ggDragonMaid_Pics/Q_Pixel_V0.3.0.png)
 **Fig 2.** Q版人物和像素风图案展示：**(A-B).** 小林； **(C-D).** 托尔。
@@ -129,6 +129,11 @@ ggDragonMaid::example_venn()
 ## 🧑‍🎨 配色参考 / Color Reference
 所有颜色均参考自萌娘百科《小林家的龙女仆》角色形象设定的图片。  
 All colors are referenced from pictures of the character designs on [Moegirl Wiki](https://mzh.moegirl.org.cn/%E5%B0%8F%E6%9E%97%E5%AE%B6%E7%9A%84%E9%BE%99%E5%A5%B3%E4%BB%86).
+
+## 📑 历史更新 / Update History
+
+**V0.2.0:**
+- 增加`icon_dargon_scarf()`函数绘制小林送给托尔的围巾。 Add the `icon_dargon_scarf()` function to draw the scarf that Kobayashi gave to Tohru.
 
 ---
 Enjoy your dragon-maid palette! 🐉✨
