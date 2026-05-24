@@ -3,6 +3,8 @@
 export(ColorDataSets_Classic)
 export(Maid_color)
 export(Maid_colors_Romaji)
+export(Q_pixel_layer)
+export(Q_pixel_plot)
 export(SearchCP)
 export(SearchCharactersNameInDetails)
 export(SearchCharactersNameInMultipleLanguge)
