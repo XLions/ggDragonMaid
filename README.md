@@ -9,7 +9,7 @@ ggDragonMaid is an R package that delivers classic color palettes inspired by th
 ## ⚠️ 最新更新 / Last Update
 
 **V0.3.0:**
-- 增加`Q_pixel_layer()`和`Q_pixel_plot()`函数绘制小林和托尔的Q版像素风人物。 Add Q_pixel_layer() and Q_pixel_plot() functions to draw chibi pixel art of Kobayashi and Tohru.
+- 增加`Q_pixel_layer()`和`Q_pixel_plot()`函数绘制小林和托尔的Q版像素风人物。 Add `Q_pixel_layer()` and `Q_pixel_plot()` functions to draw chibi pixel art of Kobayashi and Tohru.
 
 ## 📦 安装 / Installation
 目前可以从 GitHub 安装开发版：  
